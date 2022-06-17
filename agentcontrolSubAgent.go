@@ -294,7 +294,7 @@ func (t *SubAgent) serveGetBulkRequest(i *gosnmp.SnmpPacket) (*gosnmp.SnmpPacket
 		for k := i.NonRepeaters; k < vc; k++ { // loop through "repeaters"
 			queryForOid := i.Variables[k].Name
 			item, id := t.getForPDUValueControl(queryForOid)
-			item = t.OIDs[uint8(id)+j] // repetition next
+			item = t.OIDs[id+int(j)] // repetition next
 
 			t.Logger.Debugf("t.getForPDUValueControl. query_for_oid=%v item=%v id=%v", queryForOid, item, id)
 			ctl, snmperr := t.getForPDUValueControlResult(item, i)
